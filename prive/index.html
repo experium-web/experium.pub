@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Espace privé | Experium</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <style>
+    :root { color-scheme: dark; }
+    * { box-sizing: border-box; }
+    body { margin: 0; min-height: 100vh; background: #0f0f0f; color: #f2f2f2; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    .shell { width: min(100% - 2rem, 670px); margin: 0 auto; padding: 3rem 0 4rem; }
+    .top { display: flex; justify-content: space-between; align-items: center; gap: 1rem; margin-bottom: 3rem; }
+    .brand { color: inherit; text-decoration: none; letter-spacing: .17em; font-size: 1.1rem; font-weight: 700; }
+    .back { color: #c7c7c7; text-decoration: none; font-size: .9rem; }
+    .back:hover, .back:focus { color: white; }
+    .panel { background: #191919; border: 1px solid #393939; border-radius: 16px; padding: clamp(1.5rem, 5vw, 2.5rem); }
+    .eyebrow { font-size: .75rem; color: #b6b6b6; text-transform: uppercase; letter-spacing: .18em; }
+    h1 { margin: .6rem 0 1rem; font-size: clamp(1.75rem, 4vw, 2.4rem); letter-spacing: -.035em; }
+    p { color: #c5c5c5; line-height: 1.6; }
+    label { display: block; margin-top: 1.4rem; margin-bottom: .45rem; color: #eee; font-size: .93rem; }
+    input { display: block; width: 100%; padding: .85rem 1rem; border-radius: 8px; border: 1px solid #626262; background: #111; color: #fff; font: inherit; }
+    input:focus, button:focus-visible, a:focus-visible { outline: 2px solid #c8bcaa; outline-offset: 3px; }
+    button { padding: .9rem 1.2rem; border-radius: 8px; font: inherit; cursor: pointer; }
+    button:disabled { opacity: .55; cursor: not-allowed; }
+    .primary { width: 100%; background: #eee5d8; color: #161616; border: 0; font-weight: 700; margin-top: 1.6rem; }
+    .secondary { background: transparent; border: 1px solid #777; color: #f2f2f2; margin-top: 1rem; }
+    .link-button { border: 0; background: transparent; color: #d6c5ad; text-decoration: underline; padding: .7rem 0; margin-top: 1rem; }
+    .feedback { min-height: 1.3rem; color: #f6ce9f; font-size: .9rem; }
+    .hidden { display: none !important; }
+    .note { font-size: .88rem; }
+    .item { border-top: 1px solid #444; padding-top: 1rem; margin-top: 1rem; }
+    .item h2 { font-size: 1.1rem; margin: .4rem 0; }
+    .item p { white-space: pre-wrap; margin: .35rem 0; overflow-wrap: anywhere; }
+    .actions { display: flex; flex-wrap: wrap; gap: .8rem; }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <header class="top">
+      <a class="brand" href="../">EXPERIUM</a>
+      <a class="back" href="../">Retour à l'accueil</a>
+    </header>
+    <section class="panel" id="login-panel">
+      <span class="eyebrow">Accès réservé</span>
+      <h1>Espace privé</h1>
+      <p>Connectez-vous avec votre adresse courriel et votre mot de passe. Seuls les comptes autorisés peuvent consulter le contenu.</p>
+      <form id="login-form">
+        <label for="email">Identifiant (adresse courriel)</label>
+        <input id="email" name="email" type="email" autocomplete="username" required />
+        <label for="password">Mot de passe</label>
+        <input id="password" name="password" type="password" autocomplete="current-password" required />
+        <button id="login-button" class="primary" type="submit">Se connecter</button>
+      </form>
+      <button class="link-button" id="forgot-button" type="button">Mot de passe oublié ?</button>
+      <p class="feedback" id="login-feedback" role="status" aria-live="polite"></p>
+    </section>
+    <section class="panel hidden" id="reset-panel">
+      <span class="eyebrow">Sécurité du compte</span>
+      <h1>Choisir un nouveau mot de passe</h1>
+      <form id="reset-form">
+        <label for="new-password">Nouveau mot de passe (12 caractères minimum)</label>
+        <input id="new-password" type="password" minlength="12" autocomplete="new-password" required />
+        <button class="primary" type="submit">Mettre à jour</button>
+      </form>
+      <p class="feedback" id="reset-feedback" role="status" aria-live="polite"></p>
+    </section>
+    <section class="panel hidden" id="private-panel">
+      <span class="eyebrow">Experium — réservé aux collaborateurs</span>
+      <h1>Espace de travail</h1>
+      <p id="welcome"></p>
+      <div id="private-content" aria-live="polite"></div>
+      <button class="secondary" type="button" id="logout-button">Se déconnecter</button>
+      <p class="feedback" id="private-feedback" role="status" aria-live="polite"></p>
+    </section>
+    <section class="panel hidden" id="unavailable-panel">
+      <h1>Configuration en cours</h1>
+      <p>La connexion privée n'est pas encore activée. Revenez plus tard.</p>
+    </section>
+  </main>
+  <script src="./config.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js" defer></script>
+  <script src="./app.js" defer></script>
+</body>
+</html>
