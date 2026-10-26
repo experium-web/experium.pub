@@ -1,0 +1,170 @@
+{
+  "version": 1,
+  "title": "TIDE — MVP v1",
+  "scenes": [
+    {
+      "id": "S01",
+      "title": "Ouverture du parcours",
+      "act": "Acte 1",
+      "kind": "sequence",
+      "status": "À définir",
+      "summary": "Décrire la situation initiale, sans fixer encore l’univers ou le scénario.",
+      "purpose": "",
+      "operator": "",
+      "media": "",
+      "x": 70,
+      "y": 225,
+      "choices": [
+        {
+          "label": "Continuer",
+          "target": "S02",
+          "effect": ""
+        }
+      ]
+    },
+    {
+      "id": "S02",
+      "title": "Première décision",
+      "act": "Acte 1",
+      "kind": "decision",
+      "status": "À définir",
+      "summary": "Définir ce que les joueurs doivent décider et comment ils perçoivent les conséquences.",
+      "purpose": "",
+      "operator": "",
+      "media": "",
+      "x": 362,
+      "y": 225,
+      "choices": [
+        {
+          "label": "Option A",
+          "target": "S03",
+          "effect": ""
+        },
+        {
+          "label": "Option B",
+          "target": "S04",
+          "effect": ""
+        },
+        {
+          "label": "Option C",
+          "target": "",
+          "effect": ""
+        }
+      ]
+    },
+    {
+      "id": "S03",
+      "title": "Conséquence A",
+      "act": "Acte 1",
+      "kind": "consequence",
+      "status": "À définir",
+      "summary": "Conséquence de l’option A. À écrire.",
+      "purpose": "",
+      "operator": "",
+      "media": "",
+      "x": 680,
+      "y": 84,
+      "choices": [
+        {
+          "label": "Continuer",
+          "target": "S05",
+          "effect": ""
+        }
+      ]
+    },
+    {
+      "id": "S04",
+      "title": "Conséquence B",
+      "act": "Acte 1",
+      "kind": "consequence",
+      "status": "À définir",
+      "summary": "Conséquence de l’option B. À écrire.",
+      "purpose": "",
+      "operator": "",
+      "media": "",
+      "x": 680,
+      "y": 358,
+      "choices": [
+        {
+          "label": "Continuer",
+          "target": "S05",
+          "effect": ""
+        }
+      ]
+    },
+    {
+      "id": "S05",
+      "title": "Transition vers l’acte 2",
+      "act": "Acte 2",
+      "kind": "sequence",
+      "status": "À définir",
+      "summary": "Prévoir la transition entre les ramifications.",
+      "purpose": "",
+      "operator": "",
+      "media": "",
+      "x": 995,
+      "y": 225,
+      "choices": [
+        {
+          "label": "Continuer",
+          "target": "S06",
+          "effect": ""
+        }
+      ]
+    },
+    {
+      "id": "S06",
+      "title": "Deuxième décision",
+      "act": "Acte 2",
+      "kind": "decision",
+      "status": "À définir",
+      "summary": "Emplacement réservé à la deuxième décision structurante.",
+      "purpose": "",
+      "operator": "",
+      "media": "",
+      "x": 1275,
+      "y": 225,
+      "choices": [
+        {
+          "label": "Continuer (provisoire)",
+          "target": "S07",
+          "effect": ""
+        }
+      ]
+    },
+    {
+      "id": "S07",
+      "title": "Troisième décision",
+      "act": "Acte 3",
+      "kind": "decision",
+      "status": "À définir",
+      "summary": "Emplacement réservé à la troisième décision structurante.",
+      "purpose": "",
+      "operator": "",
+      "media": "",
+      "x": 1555,
+      "y": 225,
+      "choices": [
+        {
+          "label": "Vers conclusion",
+          "target": "S08",
+          "effect": ""
+        }
+      ]
+    },
+    {
+      "id": "S08",
+      "title": "Conclusion à concevoir",
+      "act": "Acte 3",
+      "kind": "conclusion",
+      "status": "À définir",
+      "summary": "Le nombre et la nature des conclusions restent à déterminer.",
+      "purpose": "",
+      "operator": "",
+      "media": "",
+      "x": 1840,
+      "y": 225,
+      "choices": []
+    }
+  ]
+}

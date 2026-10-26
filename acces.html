@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Accès privé — Experium</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <style>
+    :root { color-scheme: dark; }
+    * { box-sizing: border-box; }
+    body { background:#0f0f0f; color:#f2f2f2; font-family:system-ui,-apple-system,"Segoe UI",sans-serif; margin:0; min-height:100vh; }
+    .shell { width:min(100% - 2rem, 620px); margin:0 auto; padding:3.3rem 0; }
+    .header { display:flex; align-items:center; justify-content:space-between; gap:1rem; margin-bottom:3rem; }
+    .brand { color:#f2f2f2; letter-spacing:.16em; text-decoration:none; font-size:1.1rem; font-weight:700; }
+    .back { color:#bfc0c3; text-decoration:none; font-size:.9rem; }
+    .back:hover { color:#fff; }
+    .card { background:#191919; border:1px solid #393939; border-radius:13px; padding:clamp(1.5rem,5vw,2.4rem); }
+    .eyebrow { color:#d1b889; text-transform:uppercase; font-size:.72rem; letter-spacing:.16em; font-weight:700; }
+    h1 { font-size:2rem; margin:.55rem 0 1rem; letter-spacing:-.035em; }
+    p { color:#c9c9c9; line-height:1.6; }
+    label { display:block; font-weight:650; margin:1.15rem 0 .45rem; font-size:.92rem; }
+    input { width:100%; font:inherit; border-radius:6px; border:1px solid #676767; padding:.83rem .95rem; background:#0e0e0e; color:white; }
+    input:focus-visible, button:focus-visible, a:focus-visible { outline:2px solid #e2c99c; outline-offset:3px; }
+    button { font:inherit; cursor:pointer; }
+    .primary { display:inline-block; background:#e2c99c; border:1px solid #e2c99c; color:#1c1710; font-weight:750; padding:.85rem 1.2rem; border-radius:6px; text-decoration:none; }
+    .primary:hover { background:#f3d9a5; }
+    form .primary { margin-top:1.5rem; width:100%; }
+    .secondary { border:1px solid #777; background:transparent; color:#f2f2f2; border-radius:6px; padding:.75rem 1rem; margin-top:1.3rem; }
+    .feedback { min-height:1.4rem; color:#ffbdac; font-size:.88rem; margin-bottom:0; }
+    .subtle { font-size:.83rem; color:#aba8a1; }
+    .demo-warning { font-size:.82rem; border-left:2px solid #bd9552; padding-left:.75rem; color:#c7b89f; margin-top:1.65rem; }
+    .module { background:#111; border:1px solid #494949; border-radius:10px; padding:1.25rem; margin:1.6rem 0 0; }
+    .module h2 { font-size:1.22rem; margin:0; }
+    .module p { margin:.55rem 0 1rem; font-size:.9rem; }
+    [hidden] { display:none !important; }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <header class="header">
+      <a class="brand" href="index.html">EXPERIUM</a>
+      <a class="back" href="index.html">← Accueil</a>
+    </header>
+
+    <section class="card" id="login-panel" aria-labelledby="login-title">
+      <span class="eyebrow">Espace de travail</span>
+      <h1 id="login-title">Accès privé</h1>
+      <p>Connecte-toi pour ouvrir les outils de conception d'Experium.</p>
+      <form id="login-form">
+        <label for="username">Nom d'utilisateur</label>
+        <input id="username" type="text" name="username" autocomplete="username" required />
+        <label for="password">Mot de passe</label>
+        <input id="password" type="password" name="password" autocomplete="current-password" required />
+        <button class="primary" type="submit">Se connecter</button>
+      </form>
+      <p class="feedback" id="feedback" role="status" aria-live="polite"></p>
+      <p class="demo-warning">Version de démonstration : cette connexion ne protège pas réellement les fichiers du site. Ne pas y déposer de contenu confidentiel.</p>
+    </section>
+
+    <section class="card" id="workspace-panel" aria-labelledby="workspace-title" hidden>
+      <span class="eyebrow">Espace de travail</span>
+      <h1 id="workspace-title">Bienvenue, Mat</h1>
+      <p>Voici les outils disponibles pour le développement du projet.</p>
+      <div class="module">
+        <h2>TIDE Studio</h2>
+        <p>Carte narrative, embranchements et fiches de scènes pour le MVP TIDE v1.</p>
+        <a class="primary" href="StudioTide.html">Ouvrir TIDE Studio →</a>
+      </div>
+      <div class="module">
+        <h2>ÉCHO-7 : La mémoire des absents</h2>
+        <p>Espace de travail consacré à ÉCHO-7. Le contenu sera ajouté progressivement.</p>
+        <a class="primary" href="Echo7.html">Ouvrir ÉCHO-7 →</a>
+      </div>
+      <button class="secondary" id="logout" type="button">Se déconnecter</button>
+      <p class="demo-warning">Mode prototype seulement. Les fiches du studio sont enregistrées localement dans ce navigateur, pas sur un serveur partagé.</p>
+    </section>
+  </main>
+  <script>
+    // IMPORTANT : démonstration uniquement. Le test côté navigateur n'est pas sécurisé.
+    // Il faut une authentification serveur avant toute utilisation avec des données privées.
+    (function () {
+      'use strict';
+      const form = document.getElementById('login-form');
+      const loginPanel = document.getElementById('login-panel');
+      const workspacePanel = document.getElementById('workspace-panel');
+      const feedback = document.getElementById('feedback');
+      function showWorkspace(show) {
+        loginPanel.hidden = show;
+        workspacePanel.hidden = !show;
+      }
+      form.addEventListener('submit', function (event) {
+        event.preventDefault();
+        const user = document.getElementById('username').value.trim();
+        const password = document.getElementById('password').value;
+        if (user === 'mat' && password === 'mat') {
+          showWorkspace(true);
+          feedback.textContent = '';
+        } else {
+          feedback.textContent = 'Nom d’utilisateur ou mot de passe incorrect.';
+        }
+        document.getElementById('password').value = '';
+      });
+      document.getElementById('logout').addEventListener('click', function () {
+        form.reset();
+        showWorkspace(false);
+        document.getElementById('username').focus();
+      });
+    }());
+  </script>
+</body>
+</html>

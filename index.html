@@ -2,43 +2,50 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <title>Experium</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#080f19" />
+  <meta name="description" content="Experium — Et si la prochaine histoire dépendait de vous ? Un projet d'expériences narratives et immersives en développement." />
+  <title>Experium — Et si la prochaine histoire dépendait de vous ?</title>
   <style>
-    body {
-      margin: 0;
-      height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: #0f0f0f;
-      color: #f2f2f2;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      text-align: center;
-    }
-    .container {
-      max-width: 600px;
-      padding: 2rem;
-    }
-    h1 {
-      letter-spacing: 0.15em;
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
-    }
-    p {
-      opacity: 0.85;
-      line-height: 1.6;
-      font-size: 1.1rem;
-    }
+    :root { color-scheme: dark; --text:#eef4fa; --muted:#bdc9d4; --gold:#dbbb83; }
+    * { box-sizing: border-box; }
+    body { margin:0; min-height:100vh; min-height:100dvh; color:var(--text); background:#080e18;
+      font-family:system-ui,-apple-system,"Segoe UI",sans-serif; overflow-x:hidden; }
+    body::before { content:""; position:fixed; inset:0; pointer-events:none; background:
+      radial-gradient(ellipse 65% 48% at 50% 97%,rgba(37,104,145,.24),transparent 80%),
+      radial-gradient(circle at 18% 14%,rgba(96,149,197,.12),transparent 32%),
+      radial-gradient(circle at 82% 42%,rgba(56,91,138,.11),transparent 30%),
+      linear-gradient(180deg,#0c1727,#080e18 64%,#0c1624); }
+    body::after {content:"";position:fixed;inset:0;pointer-events:none;opacity:.48;background-image:
+       radial-gradient(1px 1px at 9% 12%,#b9d6ed 99%,transparent),radial-gradient(1px 1px at 30% 72%,#bbd4ec 99%,transparent),radial-gradient(2px 2px at 68% 18%,#d7e9f6 99%,transparent),radial-gradient(1px 1px at 85% 75%,#a6c4dd 99%,transparent),radial-gradient(1px 1px at 58% 54%,#bbd4ec 99%,transparent);background-size:345px 390px,620px 380px,560px 450px,740px 570px,800px 600px;}
+    .shell { min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;position:relative;isolation:isolate; padding:5rem 1.25rem 2rem; }
+    .halo { position:absolute; width:min(80vw,780px); height:min(80vw,780px); border:1px solid rgba(134,187,218,.1); border-radius:50%; top:50%;left:50%;transform:translate(-50%,-40%);pointer-events:none; }
+    .halo::after {content:"";position:absolute;inset:13%;border-radius:50%;border:1px solid rgba(157,209,238,.05);}
+    .logo {display:block;width:min(92vw,730px);height:auto; filter:drop-shadow(0 0 25px rgba(110,191,224,.18));}
+    .eyebrow { margin:0 0 1.7rem; font-size:.75rem;font-weight:700;letter-spacing:.3em;color:#beceea;text-transform:uppercase; }
+    h1 { font-weight:450; font-size:clamp(1.85rem,4.3vw,3.65rem);line-height:1.22;letter-spacing:-.035em;max-width:850px;margin:1.6rem auto 0; }
+    h1 em {font-style:normal;color:#e4c38e;}
+    .detail { max-width:640px;font-size:clamp(.95rem,1.6vw,1.1rem);line-height:1.75;color:var(--muted);margin:1.15rem 0 2.15rem; }
+    .line {width:94px;height:1px;margin:0 auto 2rem;background:linear-gradient(to right,transparent,var(--gold),transparent);}
+    .access-link {display:inline-flex;gap:.7rem;align-items:center;justify-content:center;padding:.95rem 1.65rem;border:1px solid rgba(218,193,150,.62);border-radius:7px;background:rgba(14,27,41,.78);color:#f5f1e7;text-decoration:none;font-size:.94rem;font-weight:650;transition:background .15s,border-color .15s;}
+    .access-link:hover {border-color:#f0d4a6;background:#18283b;}
+    a:focus-visible {outline:2px solid #f0d4a6;outline-offset:5px;}
+    footer {margin-top:auto;padding-top:3.75rem;text-align:center;color:#9db0c0;font-size:.77rem;letter-spacing:.09em;}
+    footer small {font-size:inherit;}
+    @media(max-width:550px){.shell{padding-top:3.3rem}.logo{width:100%}h1{margin-top:.5rem}.detail{margin-bottom:2rem}}
+    @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>EXPERIUM</h1>
-    <p>
-      Un lieu pour manger, jouer et vivre des histoires.<br><br>
-      Projet en développement.
-    </p>
-  </div>
+  <main class="shell">
+    <div class="halo" aria-hidden="true"></div>
+    <p class="eyebrow">Imaginer · Choisir · Vivre</p>
+    <img class="logo" src="assets/experium_identite_v1.svg" alt="EXPERIUM — symbole de portail et d'étoile" width="1060" height="235" />
+    <div class="line" aria-hidden="true"></div>
+    <h1>Et si la prochaine histoire <em>dépendait de vous&nbsp;?</em></h1>
+    <p class="detail">Des univers à explorer. Des décisions à prendre. Des expériences qui ne se racontent pas tout à fait de la même façon.</p>
+    <a class="access-link" href="acces.html">Accès privé <span aria-hidden="true">↗</span></a>
+    <footer><small>EXPERIUM · PROJET EN DÉVELOPPEMENT</small></footer>
+  </main>
 </body>
 </html>

@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1060" height="235" viewBox="0 0 1060 235" role="img" aria-labelledby="t d">
+<title id="t">EXPERIUM</title><desc id="d">Symbole d'un portail étoilé entouré d'orbites, suivi du nom Experium. Proposition graphique évolutive.</desc>
+<defs>
+ <linearGradient id="orbit" x1="0%" y1="10%" x2="100%" y2="90%"><stop stop-color="#BCEEFF"/><stop offset=".48" stop-color="#719FC7"/><stop offset="1" stop-color="#D3B77D"/></linearGradient>
+ <linearGradient id="word" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#FFFFFF"/><stop offset="1" stop-color="#CFDBE7"/></linearGradient>
+ <radialGradient id="aura"><stop stop-color="#c6f3ff" stop-opacity=".3"/><stop offset="1" stop-color="#a1ddf5" stop-opacity="0"/></radialGradient>
+</defs>
+<g transform="translate(112 118)">
+  <circle r="100" fill="url(#aura)"/>
+  <circle r="80" fill="none" stroke="url(#orbit)" stroke-opacity=".32" stroke-width="1.1"/>
+  <circle r="53" fill="none" stroke="#b4d6ef" stroke-opacity=".27" stroke-width="1.2"/>
+  <ellipse rx="97" ry="25" fill="none" stroke="url(#orbit)" stroke-width="1.6" transform="rotate(-26)"/>
+  <path d="M0-66 C4-15 13-6 64 0 C13 5 4 13 0 66 C-5 13 -13 5 -64 0 C-13-6 -5-15 0-66Z" fill="#d8f5ff" opacity=".94"/>
+  <path d="M0-87L0-56 M0 56L0 87 M-87 0L-56 0 M56 0L87 0" stroke="#e5eff9" stroke-opacity=".42" stroke-width="1.2"/>
+  <circle r="10" fill="#fff"/><circle r="3" fill="#e9cb8b"/>
+  <circle cx="71" cy="-48" r="2.6" fill="#e8d5b4"/>
+</g>
+<path d="M239 174 L239 65" stroke="#8ac2db" stroke-width="1" stroke-opacity=".33"/>
+<text x="275" y="143" fill="url(#word)" font-family="Trebuchet MS, Segoe UI, Arial, sans-serif" font-weight="400" font-size="82" letter-spacing="15">EXPERIUM</text>
+<path d="M278 166 H990" stroke="url(#orbit)" stroke-opacity=".42" stroke-width="1"/>
+</svg>
