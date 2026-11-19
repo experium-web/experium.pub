@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="theme-color" content="#141b25" />
+<title>TIDE Studio — Storyboard interactif (prototype)</title>
+<style>
+:root{color-scheme:dark;--bg:#0d141d;--surface:#17222f;--surface2:#1c2b3a;--line:#354658;--ink:#eef3f6;--muted:#a3b1bb;--accent:#e8b879;--cyan:#83d2d5;--red:#f69e99;--good:#92d4b6}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--ink)}body{display:flex;flex-direction:column;min-height:100vh}button,input,select,textarea{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
+header{display:flex;justify-content:space-between;align-items:center;gap:20px;padding:18px 26px;border-bottom:1px solid var(--line);background:#131e29;flex-wrap:wrap}header .headleft{display:flex;gap:18px;align-items:center}header .symbol{width:44px;height:44px;display:grid;place-items:center;border-radius:11px;border:1px solid #746649;background:#282e2f;color:var(--accent);font-size:20px;font-weight:800;letter-spacing:-3px}header h1{font-size:19px;letter-spacing:.04em;line-height:1.15;margin:0}header h1 span{font-weight:400;color:var(--accent)}header p{font-size:12px;margin:4px 0 0;color:var(--muted)}.headbuttons,.toolbar,.buttonrow{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.button{background:#233446;color:var(--ink);border:1px solid #4b5e70;border-radius:8px;padding:9px 12px;font-weight:600;font-size:13px;min-height:36px}.button:hover{background:#32495e}.button.primary{background:var(--accent);color:#1f2023;border-color:#f3c58b}.button.primary:hover{background:#f2c995}.button.ghost{background:transparent}.button.danger{color:#ffc0ba;border-color:#765758}.button.tiny{padding:5px 8px;font-size:12px;min-height:30px}small,.small{font-size:12px;color:var(--muted)}
+.workarea{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(340px,.85fr);flex:1;min-height:710px;align-items:stretch}.map-panel{min-width:0;display:flex;flex-direction:column;border-right:1px solid var(--line)}.panel-head{padding:16px 22px;background:#162332;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}.panel-head h2{font-size:15px;margin:0}.panel-head p{margin:4px 0 0;font-size:12px;color:var(--muted)}.legend{display:flex;align-items:center;gap:16px;padding:10px 22px;background:#111c28;border-bottom:1px solid #273949;flex-wrap:wrap;font-size:12px;color:var(--muted)}.legend .dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:5px;background:var(--cyan)}.legend .dot.amber{background:var(--accent)}.legend .dot.grey{background:#91a2b0}.map-viewport{position:relative;overflow:auto;flex:1;min-height:600px;touch-action:pan-x pan-y;background-color:#0f1a26;background-image:radial-gradient(#314051 1px,transparent 1px);background-size:24px 24px}.map-canvas{position:relative;width:2100px;min-height:780px;transform-origin:top left}.map-canvas svg{position:absolute;inset:0;pointer-events:none;overflow:visible}.map-canvas svg path{stroke:#8295a4;stroke-width:2.5;fill:none;opacity:.8}.map-canvas svg .highlight{stroke:var(--accent);stroke-width:3.5;opacity:1}.map-canvas svg text{fill:#d1dde4;font-size:11px;paint-order:stroke;stroke:#142231;stroke-width:5;stroke-linejoin:round}.act-band{position:absolute;top:22px;height:700px;border-left:1px dashed #394d60;background:rgba(125,151,168,.035);border-radius:10px;pointer-events:none}.act-band span{position:absolute;top:12px;left:17px;font-size:12px;text-transform:uppercase;letter-spacing:.12em;color:#93a5b7}.node{width:226px;position:absolute;border-radius:12px;background:#1e2e3d;border:1px solid #547082;box-shadow:0 10px 22px #0004;padding:13px 13px 11px;text-align:left;color:var(--ink);cursor:grab;user-select:none;touch-action:none;z-index:2}.node:hover{border-color:#a3c5c7}.node.selected{border-color:var(--accent);box-shadow:0 0 0 2px #e8b87944,0 10px 22px #0005}.node:active{cursor:grabbing}.node .eyebrow{font-size:10px;letter-spacing:.08em;color:var(--cyan);text-transform:uppercase}.node .node-title{font-size:14px;font-weight:750;line-height:1.25;margin-top:8px;white-space:normal;overflow-wrap:anywhere}.node .node-meta{border-top:1px solid #405365;margin-top:10px;padding-top:8px;color:var(--muted);font-size:11px;display:flex;justify-content:space-between;gap:8px}.node .pill{display:inline-block;border-radius:999px;background:#334654;color:#e6f2f5;padding:2px 6px}.node[data-kind="decision"]{border-left:4px solid var(--accent)}.node[data-kind="conclusion"]{border-left:4px solid var(--good)}.node[data-kind="sequence"]{border-left:4px solid var(--cyan)}
+.editor{background:#15202c;min-width:0;max-height:calc(100vh - 82px);overflow:auto}.editor-body{padding:20px}.section-label{color:var(--accent);text-transform:uppercase;font-size:11px;letter-spacing:.13em;font-weight:700}.editor h2{font-size:22px;margin:8px 0 5px}.editor .sub{font-size:12px;color:var(--muted);margin:0 0 16px}.field{margin:0 0 14px}.field label{display:block;margin:0 0 6px;font-size:12px;font-weight:700;color:#cfd9de}.field input,.field select,.field textarea{border:1px solid #455869;border-radius:8px;background:#0f1a25;color:var(--ink);padding:9px 10px;width:100%;font-size:13px}.field textarea{min-height:83px;resize:vertical;line-height:1.45}.field input[readonly]{color:#97aab8;background:#182632}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px}.sep{margin:22px 0 17px;border:0;border-top:1px solid #394d5b}.choices-head{display:flex;justify-content:space-between;align-items:center;gap:6px}.choices-head h3{margin:0 0 10px;font-size:15px}.choice-card{border:1px solid #3f5566;border-radius:10px;background:#1a2938;padding:12px;margin:0 0 10px}.choice-card .field{margin-bottom:9px}.choice-actions{display:flex;justify-content:flex-end}.empty{font-size:13px;color:var(--muted);padding:16px;border:1px dashed #546473;border-radius:8px;margin:0}.hint{color:var(--muted);line-height:1.5;font-size:12px}.callout{margin-top:16px;background:#172b35;border:1px solid #415e68;border-radius:10px;padding:13px;font-size:12px;color:#c5d6df;line-height:1.5}.footer{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap;padding:11px 20px;font-size:12px;background:#121d28;border-top:1px solid var(--line);color:var(--muted)}.toast{position:fixed;right:20px;bottom:20px;background:#293f4d;border:1px solid #6d939d;border-radius:10px;padding:10px 14px;box-shadow:0 8px 25px #0008;display:none;z-index:99}.toast.visible{display:block}.visually-hidden{position:absolute;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+@media(max-width:1060px){.workarea{grid-template-columns:1fr}.map-panel{min-height:570px;border-right:0;border-bottom:1px solid var(--line)}.map-viewport{min-height:465px}.editor{max-height:none;overflow:visible}.editor-body{max-width:800px;margin:0 auto}.panel-head{padding:13px 18px}}@media(max-width:520px){header{padding:14px}.map-panel{min-height:515px}.legend{padding:10px 14px}.panel-head{padding:12px 14px}.editor-body{padding:16px}.headbuttons .button{font-size:12px;padding:8px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="headleft"><div class="symbol" aria-hidden="true">T/</div><div><h1>TIDE <span>STUDIO</span></h1><p>Storyboard interactif · prototype de conception</p></div></div>
+  <div class="headbuttons">
+    <button class="button primary" id="add-scene">+ Nouvelle scène</button>
+    <button class="button" id="export-json" title="Télécharger un fichier de sauvegarde">Exporter JSON</button>
+    <button class="button" id="import-json">Importer JSON</button>
+    <input id="json-file" type="file" accept=".json,application/json" class="visually-hidden" />
+  </div>
+</header>
+<div class="workarea">
+  <section class="map-panel" aria-label="Carte des scènes">
+    <div class="panel-head"><div><h2>Carte narrative</h2><p>Sélectionne une carte pour modifier sa fiche. Glisse-la pour organiser le parcours.</p></div><div class="toolbar"><span id="scene-count" class="small"></span><button class="button tiny ghost" id="reset-map">Recentrer</button></div></div>
+    <div class="legend"><span><i class="dot" aria-hidden="true"></i> Séquence</span><span><i class="dot amber" aria-hidden="true"></i> Décision</span><span><i class="dot grey" aria-hidden="true"></i> Fiches à compléter</span></div>
+    <div class="map-viewport" id="map-viewport" tabindex="0" aria-label="Carte défilable des scènes"><div class="map-canvas" id="map-canvas"><svg id="edges" aria-hidden="true"></svg><div id="nodes"></div></div></div>
+  </section>
+  <aside class="editor" aria-label="Fiche de scène"><div class="editor-body" id="editor-body"></div></aside>
+</div>
+<div class="footer"><span>Les données restent dans ce navigateur. Utilise « Exporter JSON » pour une vraie copie de sécurité.</span><span id="save-state" role="status" aria-live="polite">Prototype local · non partagé</span></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script>
+(()=>{
+'use strict';
+const STORAGE_KEY='experium-tide-studio-v1';
+const $=id=>document.getElementById(id);
+const types={sequence:'Séquence',decision:'Décision',consequence:'Conséquence',conclusion:'Conclusion'};
+const statuses=['À définir','En rédaction','À réviser','Prête à tester'];
+const initial={version:1,title:'TIDE — MVP v1',scenes:[
+{id:'S01',title:'Ouverture du parcours',act:'Acte 1',kind:'sequence',status:'À définir',summary:'Décrire la situation initiale, sans fixer encore l’univers ou le scénario.',purpose:'',operator:'',media:'',x:70,y:225,choices:[{label:'Continuer',target:'S02',effect:''}]},
+{id:'S02',title:'Première décision',act:'Acte 1',kind:'decision',status:'À définir',summary:'Définir ce que les joueurs doivent décider et comment ils perçoivent les conséquences.',purpose:'',operator:'',media:'',x:362,y:225,choices:[{label:'Option A',target:'S03',effect:''},{label:'Option B',target:'S04',effect:''}]},
+{id:'S03',title:'Conséquence A',act:'Acte 1',kind:'consequence',status:'À définir',summary:'Conséquence de l’option A. À écrire.',purpose:'',operator:'',media:'',x:680,y:84,choices:[{label:'Continuer',target:'S05',effect:''}]},
+{id:'S04',title:'Conséquence B',act:'Acte 1',kind:'consequence',status:'À définir',summary:'Conséquence de l’option B. À écrire.',purpose:'',operator:'',media:'',x:680,y:358,choices:[{label:'Continuer',target:'S05',effect:''}]},
+{id:'S05',title:'Transition vers l’acte 2',act:'Acte 2',kind:'sequence',status:'À définir',summary:'Prévoir la transition entre les ramifications.',purpose:'',operator:'',media:'',x:995,y:225,choices:[{label:'Continuer',target:'S06',effect:''}]},
+{id:'S06',title:'Deuxième décision',act:'Acte 2',kind:'decision',status:'À définir',summary:'Emplacement réservé à la deuxième décision structurante.',purpose:'',operator:'',media:'',x:1275,y:225,choices:[{label:'Continuer (provisoire)',target:'S07',effect:''}]},
+{id:'S07',title:'Troisième décision',act:'Acte 3',kind:'decision',status:'À définir',summary:'Emplacement réservé à la troisième décision structurante.',purpose:'',operator:'',media:'',x:1555,y:225,choices:[{label:'Vers conclusion',target:'S08',effect:''}]},
+{id:'S08',title:'Conclusion à concevoir',act:'Acte 3',kind:'conclusion',status:'À définir',summary:'Le nombre et la nature des conclusions restent à déterminer.',purpose:'',operator:'',media:'',x:1840,y:225,choices:[]}
+]};
+const copy=value=>JSON.parse(JSON.stringify(value));
+function validate(input){
+ if(!input||input.version!==1||!Array.isArray(input.scenes)||input.scenes.length>120)throw Error('Format JSON non reconnu (version 1 attendue, maximum 120 scènes).');
+ const ids=new Set();
+ const scenes=input.scenes.map(s=>{
+   if(!s||typeof s.id!=='string'||!s.id.trim()||ids.has(s.id))throw Error('Identifiants de scènes invalides ou en double.');ids.add(s.id);
+   const asText=(v,max=10000)=>typeof v==='string'?v.slice(0,max):'';
+   const choices=Array.isArray(s.choices)?s.choices.slice(0,20).map(c=>({label:asText(c.label,180),target:asText(c.target,80),effect:asText(c.effect,1500)})):[];
+   return {id:asText(s.id,80),title:asText(s.title,250),act:['Acte 1','Acte 2','Acte 3','Autre'].includes(s.act)?s.act:'Autre',kind:types[s.kind]?s.kind:'sequence',status:statuses.includes(s.status)?s.status:statuses[0],summary:asText(s.summary),purpose:asText(s.purpose),operator:asText(s.operator),media:asText(s.media,600),x:Math.min(9000,Math.max(0,Number.isFinite(s.x)?s.x:80)),y:Math.min(9000,Math.max(0,Number.isFinite(s.y)?s.y:100)),choices};
+ });
+ for(const s of scenes)for(const c of s.choices)if(c.target&&!ids.has(c.target))c.target='';
+ return {version:1,title:typeof input.title==='string'?input.title.slice(0,200):'TIDE — MVP v1',scenes};
+}
+let project=copy(initial),selected='S02',dirty=false;let drag=null;let dragged=false;
+try{const saved=localStorage.getItem(STORAGE_KEY);if(saved){project=validate(JSON.parse(saved));selected=project.scenes[0]?.id||null}}catch(e){console.warn('Sauvegarde locale indisponible ou non reconnue',e)}
+function save(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify(project));$('save-state').textContent='Enregistré dans ce navigateur';dirty=false;}catch(e){$('save-state').textContent='Stockage indisponible — exporter le JSON !';dirty=true}}
+function toast(msg){const el=$('toast');el.textContent=msg;el.classList.add('visible');clearTimeout(toast.timer);toast.timer=setTimeout(()=>el.classList.remove('visible'),3300)}
+const scene=id=>project.scenes.find(s=>s.id===id);
+function el(tag,cls,text){const out=document.createElement(tag);if(cls)out.className=cls;if(text!==undefined)out.textContent=text;return out}
+function button(text,cls,fn){const b=el('button',cls,text);b.type='button';b.addEventListener('click',fn);return b}
+function renderMap(){
+ const canvas=$('map-canvas'),nodes=$('nodes');nodes.replaceChildren();
+ const width=Math.max(1000,...project.scenes.map(s=>s.x+285));const height=Math.max(740,...project.scenes.map(s=>s.y+195));canvas.style.width=width+'px';canvas.style.height=height+'px';
+ for(const s of project.scenes){
+  const n=el('button','node'+(s.id===selected?' selected':''));n.type='button';n.style.left=s.x+'px';n.style.top=s.y+'px';n.dataset.id=s.id;n.dataset.kind=s.kind;n.setAttribute('aria-label','Ouvrir '+s.title);
+  n.append(el('div','eyebrow',s.id+' · '+s.act),el('div','node-title',s.title||'Sans titre'));
+  const meta=el('div','node-meta');meta.append(el('span','',types[s.kind]||'Séquence'),el('span','pill',s.status));n.append(meta);
+  n.addEventListener('click',()=>{if(dragged){dragged=false;return;}selected=s.id;renderMap();renderEditor()});
+  n.addEventListener('pointerdown',e=>{
+    if(e.button!==0)return;
+    drag={id:s.id,startX:e.clientX,startY:e.clientY,origX:s.x,origY:s.y,changed:false};n.setPointerCapture(e.pointerId);
+  });
+  n.addEventListener('pointermove',e=>{
+    if(!drag||drag.id!==s.id)return;
+    const dx=e.clientX-drag.startX,dy=e.clientY-drag.startY;if(Math.abs(dx)+Math.abs(dy)<5&&!drag.changed)return;
+    drag.changed=true;s.x=Math.max(10,Math.round(drag.origX+dx));s.y=Math.max(10,Math.round(drag.origY+dy));n.style.left=s.x+'px';n.style.top=s.y+'px';renderEdges();
+  });
+  n.addEventListener('pointerup',()=>{if(drag?.changed){dragged=true;save();renderMap();setTimeout(()=>{dragged=false},0)}drag=null});
+  n.addEventListener('pointercancel',()=>{if(drag?.changed){save();renderMap()}drag=null});
+  nodes.append(n);
+ }
+ renderEdges();$('scene-count').textContent=project.scenes.length+' scènes';
+}
+function renderEdges(){
+ const svg=$('edges');svg.replaceChildren();svg.setAttribute('width',$('map-canvas').style.width);svg.setAttribute('height',$('map-canvas').style.height);
+ const ns='http://www.w3.org/2000/svg';
+ for(const s of project.scenes){for(const [i,c] of s.choices.entries()){
+  const target=scene(c.target);if(!target)continue;
+  const x1=s.x+226,y1=s.y+56,x2=target.x,y2=target.y+54;
+  const path=document.createElementNS(ns,'path');
+  const sameBack=x2<=x1+10;
+  if(sameBack){let mid=Math.min(s.y,target.y)-38-i*18;path.setAttribute('d',`M ${x1} ${y1} C ${x1+70} ${mid}, ${x2-70} ${mid}, ${x2} ${y2}`)}
+  else{const d=Math.max(55,(x2-x1)/2);path.setAttribute('d',`M ${x1} ${y1} C ${x1+d} ${y1}, ${x2-d} ${y2}, ${x2} ${y2}`)}
+  if(s.id===selected||target.id===selected)path.classList.add('highlight');svg.append(path);
+  if(s.choices.length>1){const label=document.createElementNS(ns,'text');label.setAttribute('x',String(x1+18));label.setAttribute('y',String(y1+20+i*17));label.textContent=(c.label||'Choix').slice(0,22);svg.append(label)}
+ }}
+}
+function field(container,label,value,onChange,tag='input',props={}){
+ const wrap=el('div','field');const lab=el('label','',label);const id='field-'+Math.random().toString(36).slice(2);lab.htmlFor=id;
+ const input=el(tag);input.id=id;
+ if(tag==='select'){for(const item of props.options||[]){const o=el('option','',typeof item==='string'?item:item.label);o.value=typeof item==='string'?item:item.value;input.append(o)}}
+ else if(tag==='textarea'){input.rows=props.rows||3}
+ else{input.type=props.type||'text';if(props.placeholder)input.placeholder=props.placeholder}
+ input.value=value??'';input.addEventListener(tag==='select'?'change':'input',()=>onChange(input.value));wrap.append(lab,input);container.append(wrap);return input;
+}
+function renderEditor(){
+ const root=$('editor-body');root.replaceChildren();const s=scene(selected);
+ if(!s){root.append(el('div','section-label','Fiche de scène'),el('h2','','Choisis une scène sur la carte'));return}
+ root.append(el('div','section-label','Fiche de scène'),el('h2','',s.title||'Sans titre'),el('p','sub',s.id+' · Chaque scène possède sa propre fiche éditable.'));
+ const grid=el('div','form-grid');root.append(grid);
+ field(grid,'Identifiant',s.id,()=>{},'input',{type:'text'}).readOnly=true;
+ field(grid,'Acte',s.act,v=>{s.act=v;changed(true)},'select',{options:['Acte 1','Acte 2','Acte 3','Autre']});
+ field(grid,'Type',s.kind,v=>{s.kind=v;changed(true)},'select',{options:Object.entries(types).map(([value,label])=>({value,label}))});
+ field(grid,'Avancement',s.status,v=>{s.status=v;changed(true)},'select',{options:statuses});
+ field(root,'Titre',s.title,v=>{s.title=v;changed(true)},'input',{placeholder:'Titre de la scène'});
+ field(root,'Contenu / déroulement',s.summary,v=>{s.summary=v;changed()},'textarea',{rows:4});
+ field(root,'But narratif / effet attendu',s.purpose,v=>{s.purpose=v;changed()},'textarea',{rows:3});
+ field(root,'Consignes pour l’opérateur',s.operator,v=>{s.operator=v;changed()},'textarea',{rows:3});
+ field(root,'Référence média future (facultatif)',s.media,v=>{s.media=v;changed()},'input',{placeholder:'ex. scene-04-projection.mp4'});
+ root.append(el('p','hint','Ce champ sert uniquement de référence pour le moment : aucun fichier vidéo n’est téléversé ni exécuté.'));
+ root.append(el('hr','sep'));
+ const choiceHead=el('div','choices-head');choiceHead.append(el('h3','','Transitions et choix'));
+ choiceHead.append(button('+ Ajouter', 'button tiny',()=>{s.choices.push({label:'Nouveau choix',target:'',effect:''});save();renderEditor();renderMap()}));root.append(choiceHead);
+ if(!s.choices.length)root.append(el('p','empty','Aucun lien sortant. Une conclusion peut se terminer ici.'));
+ s.choices.forEach((c,i)=>{
+  const card=el('div','choice-card');
+  field(card,'Libellé / action du joueur',c.label,v=>{c.label=v;changed(true)},'input');
+  const options=[{value:'',label:'— Aucune destination —'},...project.scenes.filter(x=>x.id!==s.id).map(x=>({value:x.id,label:x.id+' — '+x.title}))];
+  field(card,'Scène suivante',c.target,v=>{c.target=v;changed(true)},'select',{options});
+  field(card,'Conséquence de ce choix (facultatif)',c.effect,v=>{c.effect=v;changed()},'textarea',{rows:2});
+  const actions=el('div','choice-actions');actions.append(button('Retirer ce lien','button tiny danger',()=>{s.choices.splice(i,1);save();renderEditor();renderMap()}));card.append(actions);root.append(card);
+ });
+ root.append(el('hr','sep'));
+ const bar=el('div','buttonrow');bar.append(button('Dupliquer la scène','button tiny',()=>duplicate(s.id)));
+ bar.append(button('Supprimer cette scène','button tiny danger',()=>removeScene(s.id)));root.append(bar);
+ const note=el('div','callout');note.textContent='Version 1 : la carte et les fiches fonctionnent ensemble. Les modifications sont enregistrées localement sur cet appareil. L’accès en ligne partagé, l’opération des projections et le questionnaire QR viendront dans des étapes distinctes.';root.append(note);
+}
+function changed(redraw=false){save();if(redraw)renderMap()}
+function nextId(){let i=1;while(scene('S'+String(i).padStart(2,'0')))i++;return 'S'+String(i).padStart(2,'0')}
+function addScene(){const id=nextId();const last=project.scenes.at(-1);const s={id,title:'Nouvelle scène',act:'Acte 1',kind:'sequence',status:'À définir',summary:'',purpose:'',operator:'',media:'',x:last?Math.min(last.x+270,8500):100,y:last?last.y+140:120,choices:[]};project.scenes.push(s);selected=id;save();renderMap();renderEditor();scrollToScene(s);toast('Scène créée')}
+function duplicate(id){const src=scene(id);if(!src)return;const n=copy(src);n.id=nextId();n.title=src.title+' (copie)';n.x=src.x+42;n.y=src.y+160;project.scenes.push(n);selected=n.id;save();renderMap();renderEditor();scrollToScene(n);toast('Fiche dupliquée')}
+function removeScene(id){if(!confirm('Supprimer cette scène et tous les liens qui y mènent ?'))return;project.scenes=project.scenes.filter(s=>s.id!==id);for(const s of project.scenes)s.choices=s.choices.filter(c=>c.target!==id);selected=project.scenes[0]?.id||null;save();renderMap();renderEditor();toast('Scène supprimée')}
+function scrollToScene(s){const viewport=$('map-viewport');viewport.scrollTo({left:Math.max(0,s.x-viewport.clientWidth/3),top:Math.max(0,s.y-viewport.clientHeight/3),behavior:'smooth'})}
+$('add-scene').addEventListener('click',addScene);
+$('export-json').addEventListener('click',()=>{const blob=new Blob([JSON.stringify(project,null,2)],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='tide-studio-storyboard.json';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);toast('Copie JSON téléchargée')});
+$('import-json').addEventListener('click',()=>$('json-file').click());
+$('json-file').addEventListener('change',async e=>{
+ const file=e.target.files?.[0];if(!file)return;
+ try{if(file.size>2500000)throw Error('Ce fichier est trop volumineux.');const parsed=validate(JSON.parse(await file.text()));if(!confirm('Remplacer le storyboard actuellement présent dans ce navigateur par le fichier importé ?'))return;project=parsed;selected=project.scenes[0]?.id||null;save();renderMap();renderEditor();$('map-viewport').scrollTo(0,0);toast('Storyboard importé')}
+ catch(err){alert('Importation impossible : '+err.message)}finally{e.target.value=''}
+});
+$('reset-map').addEventListener('click',()=>{const s=scene(selected)||project.scenes[0];if(s)scrollToScene(s);else $('map-viewport').scrollTo(0,0)});
+renderMap();renderEditor();setTimeout(()=>{$('map-viewport').scrollLeft=0;$('map-viewport').scrollTop=0},50);
+})();
+</script>
+</body>
+</html>
